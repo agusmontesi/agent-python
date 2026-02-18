@@ -20,7 +20,6 @@ from livekit.agents import (
 )
 from livekit.agents.llm import ImageContent
 from livekit.plugins import bey, noise_cancellation, silero
-from livekit.plugins.turn_detector.multilingual import MultilingualModel
 
 logger = logging.getLogger("agent")
 
@@ -209,7 +208,6 @@ async def my_agent(ctx: JobContext):
             model="cartesia/sonic-3", voice=VOICE_ID
         ),
         # VAD and turn detection for natural conversation flow
-        turn_detection=MultilingualModel(),
         vad=ctx.proc.userdata["vad"],
         # Preemptive generation reduces latency
         preemptive_generation=True,
