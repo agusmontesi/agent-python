@@ -169,7 +169,7 @@ Tone: Professional, calm, authoritative when needed.""",
     async def on_enter(self) -> None:
         await super().on_enter()  # Set up video stream
         logger.info(f"ModeratorAgent entered with voice {VOICE_ID}")
-        await self.session.generate_reply(
+        await self.ion.generate_reply(
             instructions="Greet the user briefly and professionally. Keep it short. Mention you can help with OnePlan services. You can see their screen if shared."
         )
 
@@ -232,7 +232,8 @@ async def my_agent(ctx: JobContext):
 
     # Start the session with video input enabled for screen sharing
     moderator_agent = ModeratorAgent()
-    
+        # Join the room and connect to the user
+    await ctx.connect()
     await session.start(
         agent=moderator_agent,
         room=ctx.room,
@@ -247,8 +248,7 @@ async def my_agent(ctx: JobContext):
         ),
     )
 
-    # Join the room and connect to the user
-    await ctx.connect()
+
 
 
 if __name__ == "__main__":
