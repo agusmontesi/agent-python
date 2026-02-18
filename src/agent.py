@@ -49,8 +49,8 @@ class BaseAgent(Agent):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self._latest_frame: Optional[rtc.VideoFrame] = None
-        self._video_stream: Optional[rtc.VideoStream] = None
+        self._latest_frame: Optal[rtc.VideoFrame] = None
+        self._video_stream: Optal[rtc.VideoStream] = None
         self._tasks = []  # Prevent garbage collection of running tasks
 
     async def on_enter(self) -> None:
@@ -169,7 +169,7 @@ Tone: Professional, calm, authoritative when needed.""",
     async def on_enter(self) -> None:
         await super().on_enter()  # Set up video stream
         logger.info(f"ModeratorAgent entered with voice {VOICE_ID}")
-        await self.ion.generate_reply(
+        await self.session.generate_reply(
             instructions="Greet the user briefly and professionally. Keep it short. Mention you can help with OnePlan services. You can see their screen if shared."
         )
 
